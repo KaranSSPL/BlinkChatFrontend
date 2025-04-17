@@ -16,7 +16,7 @@ function App() {
     try {
       setChatHistory(prevHistory => [...prevHistory, { role: 'user', message }]);
 
-      const response = await fetch(`https://localhost:7073/api/AI/get-response`, {
+      const response = await fetch(`http://localhost:5273/api/AI/get-response`, {
         method: 'POST',
         body: JSON.stringify({ question: message }),
         headers: { "content-type": "application/json" }

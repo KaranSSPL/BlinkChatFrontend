@@ -1,0 +1,19 @@
+.AskAiContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+  
+    .sparkleIcon {
+      width: 32px;
+      margin-bottom: 12px;
+    }
+  
+    .ask_title {
+        font-size: 28px;
+        font-weight: 600;
+        color: #1e1e1e;
+    }
+  }
+  

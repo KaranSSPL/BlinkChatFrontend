@@ -8,7 +8,7 @@ import remarkGfm from 'remark-gfm';
 import rehypeExternalLinks from 'rehype-external-links';
 import ChatStamp from "../ChatStamp/ChatStamp";
 
-const ChatHeader: React.FC<ChatHeaderProps> = ({chatHistory}) => {
+const ChatHeader: React.FC<ChatHeaderProps> = ({ chatHistory }) => {
     return (
         <div className={styles.chatBox}>
             {chatHistory.map((chat, index) => (
@@ -20,6 +20,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({chatHistory}) => {
                         <ReactMarkdown skipHtml={false} rehypePlugins={[[rehypeRaw], [rehypeExternalLinks, { target: '_blank' }], [rehypeKatex]]} remarkPlugins={[remarkGfm]}>
                             {chat.message}
                         </ReactMarkdown>
+                        <div className={styles.timeStamp}>{chat.timestamp}</div>
                     </div>
                 </div>
             ))}

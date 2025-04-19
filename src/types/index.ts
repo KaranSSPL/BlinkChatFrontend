@@ -3,6 +3,11 @@ export type ApplicationDetailsType = {
     aiTitle: string
 }
 
+export type ChatMember = {
+    ChatUser: string
+    ChatAssistant: string
+}
+
 export enum Roles {
     User,
     Bot

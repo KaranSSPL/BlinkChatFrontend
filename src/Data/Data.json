@@ -1,4 +1,8 @@
 {
         "applicationName": "Blink Chat",
-        "aiTitle": "Ask our AI anything"
+        "aiTitle": "Ask our AI anything",
+        "ChatMember":  {
+                "ChatUser": "You",
+                "ChatAssistant": "Bot"
+        }
 }

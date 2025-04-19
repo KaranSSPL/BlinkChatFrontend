@@ -6,6 +6,7 @@
     padding: 10px;
     margin-bottom: 10px;
     height: 72vh;
+
     .chat_row {
         display: flex;
         gap: 2rem;
@@ -23,11 +24,11 @@
 
         .text {
             font-family: 'Noto Sans Devanagari', 'Mukta', sans-serif;
-            background: rgba(255, 255, 255, 0.4); 
+            background: rgba(255, 255, 255, 0.4);
             -webkit-backdrop-filter: blur(10px);
             padding: 0px 10px;
             border-radius: 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.3); 
+            border: 1px solid rgba(255, 255, 255, 0.3);
             max-width: 70%;
             font-size: 1rem;
             line-height: 1.5;
@@ -35,6 +36,21 @@
             color: #000;
             word-wrap: break-word;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+
+            .timeStamp {
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.2s ease, visibility 0.2s ease;
+                font-size: 0.75rem;
+                color: #888;
+                margin-top: 0.25rem;
+              }
+            
+              &:hover .timeStamp {
+                opacity: 1;
+                visibility: visible;
+              }
+
         }
     }
 

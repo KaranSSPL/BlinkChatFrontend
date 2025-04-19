@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import styles from './Textarea.module.scss';
+import styles from './TextArea.module.scss';
 
 type TextareaProps = {
     value: string;

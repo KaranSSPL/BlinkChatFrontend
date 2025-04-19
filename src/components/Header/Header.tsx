@@ -1,4 +1,4 @@
-import styles from "./header.module.scss"
+import styles from "./Header.module.scss"
 import { ApplicationDetailsType } from "../../types";
 import ApplicationDetails from "../../Data/Data.json";
 

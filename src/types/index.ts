@@ -19,6 +19,7 @@ export type ChatHistory = {
 
 export type ChatHeaderProps = {
     chatHistory: ChatHistory[];
+    loading: boolean;
 }
 
 export type ChatStampProps = {

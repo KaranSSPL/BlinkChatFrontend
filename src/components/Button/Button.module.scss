@@ -1,0 +1,44 @@
+.button {
+
+
+    & .clear {
+        padding: 10px 16px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 8px;
+        background: rgb(0, 0, 0);
+        font-size: 14px;
+        color: white;
+        cursor: pointer;
+        margin: 8px;
+        transition: background 0.3s ease;
+        padding: 10px;
+        display: flex;
+        gap: 10px;
+        justify-content: space-between;
+
+        img{
+            width: 15px;
+            color: white;
+        }
+    }
+
+    & .regenerate {
+        background: none;
+        border: none;
+        cursor: pointer;
+
+        img {
+            width: 15px;
+        }
+    }
+
+    & .copy {
+        background: none;
+        border: none;
+        cursor: pointer;
+
+        img {
+            width: 15px;
+        }
+    }
+}

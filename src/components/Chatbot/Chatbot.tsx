@@ -15,12 +15,10 @@ const Chatbot = () => {
     console.log("File selected:", file);
   };
 
-  const sessionId = sessionStorage.setItem("sessionId", uuidv4());
+  const sessionId = uuidv4();
+  sessionStorage.setItem("sessionId", sessionId);
 
-  const handleSendText = async (
-    message: string,
-    isRegenerate: boolean = false
-  ) => {
+  const handleSendText = async (message: string, isRegenerate: boolean = false) => {
     try {
       if (!isRegenerate) {
         setChatHistory((prevHistory) => [
@@ -54,15 +52,17 @@ const Chatbot = () => {
       const controller = new AbortController();
       abortControllerRef.current = controller;
 
-      const response = await fetch(
-        `${import.meta.env.CHATBOT_API_BASE_URL}/api/agent`,
-        {
-          method: "POST",
-          body: JSON.stringify({ query: message, sessionId: sessionId }),
-          headers: { "content-type": "application/json" },
-          signal: controller.signal,
-        }
-      );
+      const response = await fetch(`http://localhost:5273/api/agent`, {
+        method: "POST",
+        body: JSON.stringify({
+          question: message,
+          sessionId: sessionId,
+          regenerate: false,
+          reset: false,
+        }),
+        headers: { "content-type": "application/json" },
+        signal: controller.signal,
+      });
 
       if (response.status === 400) {
         console.error("Bad Request: Likely a validation error.");
@@ -95,9 +95,7 @@ const Chatbot = () => {
         setChatHistory((prevHistory) => {
           const updatedHistory = [...prevHistory];
 
-          const lastIndex = updatedHistory
-            .map((x) => x.role)
-            .lastIndexOf(Roles.Bot);
+          const lastIndex = updatedHistory.map((x) => x.role).lastIndexOf(Roles.Bot);
 
           if (lastIndex !== -1) {
             updatedHistory[lastIndex] = {

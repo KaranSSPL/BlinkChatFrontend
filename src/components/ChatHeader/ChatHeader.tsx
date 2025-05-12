@@ -12,13 +12,11 @@ import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import DotLoader from "../DotLoader/DotLoader";
 import Button from "../Button/Button";
 import Refresh from "../../assets/refresh.png"
-import Copy from "../../assets/copy.png"
 import Dustbin from "../../assets/dustbin.png"
 
 const ChatHeader: React.FC<ChatHeaderProps> = ({ chatHistory, loading, setChatHistory, abortControllerRef, handleSendText }) => {
 
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-    const [copiedMessageIndex, setCopiedMessageIndex] = useState<number | null>(null);
     const chatEndRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -60,25 +58,14 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({ chatHistory, loading, setChatHi
         const absoluteUserIndex = lastUserIndex !== -1 ? updatedHistory.length - 1 - lastUserIndex : -1;
 
         if (absoluteUserIndex !== -1) {
-            const lastUserMessage = updatedHistory[absoluteUserIndex].message;
 
             const trimmedHistory = updatedHistory.slice(0, absoluteUserIndex + 2)
                 .filter((chat, i) => i === absoluteUserIndex + 1 ? chat.role !== Roles.Bot : true);
 
             setChatHistory(trimmedHistory);
-            handleSendText(lastUserMessage, true);
+            handleSendText('', true,false);
 
         }
-    };
-
-
-    const handleCopy = (text: string, index: number) => {
-        navigator.clipboard
-            .writeText(text)
-            .then(() => {
-                setCopiedMessageIndex(index);
-            })
-            .catch((err) => console.error('Failed to copy text: ', err));
     };
 
     return (
@@ -119,15 +106,6 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({ chatHistory, loading, setChatHi
                             >
                                 <img src={Refresh} alt="Regenerate Message" />
                             </Button>
-                            <Button
-                                onClick={handleCopy(chat.message, index)}
-                                variant="copy"
-                            >
-                                {
-                                    copiedMessageIndex === index ?
-                                        <img src={Copy} alt="Copy Message" /> : " "
-                                }
-                            </Button>
                         </div>
                     )}
                 </div>
@@ -137,10 +115,8 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({ chatHistory, loading, setChatHi
                     <div className={styles.buttonRow}>
                         <Button
                             onClick={() => {
+                                handleSendText('',false,true);
                                 setChatHistory([]);
-                                if (abortControllerRef.current) {
-                                    abortControllerRef.current.abort();
-                                }
                             }}
                             variant="clear"
                         >

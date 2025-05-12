@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import ChatInputBar from "../InputBar/ChatInputBar";
 import styles from "./Chatbot.module.scss";
 import ChatHeader from "../ChatHeader/ChatHeader";
@@ -15,10 +14,7 @@ const Chatbot = () => {
     console.log("File selected:", file);
   };
 
-  const sessionId = uuidv4();
-  sessionStorage.setItem("sessionId", sessionId);
-
-  const handleSendText = async (message: string, isRegenerate: boolean = false) => {
+  const handleSendText = async (message: string, isRegenerate: boolean = false,isReset:boolean = false) => {
     try {
       if (!isRegenerate) {
         setChatHistory((prevHistory) => [
@@ -55,10 +51,10 @@ const Chatbot = () => {
       const response = await fetch(`http://localhost:5273/api/agent`, {
         method: "POST",
         body: JSON.stringify({
-          question: message,
-          sessionId: sessionId,
-          regenerate: false,
-          reset: false,
+          question: isRegenerate?"": message,
+          sessionId: sessionStorage.getItem("sessionId")??"default",
+          regenerate: isRegenerate,
+          reset: isReset,
         }),
         headers: { "content-type": "application/json" },
         signal: controller.signal,

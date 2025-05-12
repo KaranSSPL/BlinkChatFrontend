@@ -22,7 +22,7 @@ export type ChatHeaderProps = {
     loading: boolean;
     setChatHistory: React.Dispatch<React.SetStateAction<ChatHistory[]>>;
     abortControllerRef: any;
-    handleSendText: (message: string, isRegenerate: boolean) => void;
+    handleSendText: (message: string, isRegenerate: boolean, isReset:boolean) => void;
 }
 
 export type ChatStampProps = {
